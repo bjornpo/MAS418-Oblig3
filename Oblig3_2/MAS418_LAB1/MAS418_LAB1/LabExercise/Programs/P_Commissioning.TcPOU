@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_Commissioning" Id="{09c3f274-bdba-4933-93a5-83282d15a683}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_Commissioning
+VAR
+	fbModifyAutomaticControlSettings : FB_ModifyAutomaticControlSettings;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbModifyAutomaticControlSettings(
+	stParamOpenLoopControllSettings 	:= G_Parameters.stParam.stOpenLoopControlSettings,
+	bSetNewMaxFlowCapacity 				:= G_Commissioning.bSetNewMaxFlowCapacity,
+	fNewMaxFlowCapacity 				:= G_Commissioning.fNewMaxFlowCapacity,
+	stParamClosedLoopControllSettings 	:= G_Parameters.stParam.stClosedLoopControlSettings,	
+	bSetNewProportionalGain 			:= G_Commissioning.bSetNewProportionalGain,
+	fNewProportionalGain 				:= G_Commissioning.fNewProportionalGain,
+	bSetNewIntegralGain 				:= G_Commissioning.bSetNewIntegralGain,
+	fNewIntegralGain 					:= G_Commissioning.fNewIntegralGain,
+	bSetNewMaxPositionError 			:= G_Commissioning.bSetNewMaxPositionError,
+	fNewMaxPositionError 				:= G_Commissioning.fNewMaxPositionError
+);
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

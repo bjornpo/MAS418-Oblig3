@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{710c49b1-6c28-4dfa-b3ee-ba840c2a49f8}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	bActivateMotion 	: BOOL;
+	fVelRef 			: LREAL;
+	fPosRef 			: LREAL;
+	fPosMeas 			: LREAL;
+	fPres1Meas			: LREAL;
+	fPres2Meas			: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[P_Commissioning();
+P_ControlBox();
+P_CraneControl();
+
+G_Simulator.bSimulatorOn := bActivateMotion;
+fPosMeas := G_Simulator.fBoomAngle;
+G_Commissioning.stMotionReferenceGeneratorSettings.fPositionSetpoint_ms := fVelRef;
+G_Commissioning.stMotionReferenceGeneratorSettings.fHoldPositionTime_s := 1000.0;
+fPres1Meas := G_Simulator.fPistonSidePressure;
+fPres2Meas := G_Simulator.fRodSidePressure;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
